@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>РемонтПросто48 - подбор специалистов для дома</title>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+body {
+font-family: 'Arial', sans-serif;
+line-height: 1.6;
+color: #333;
+background-color: #f8f9fa;
+}
+.container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 0 20px;
+}
+header {
+background: linear-gradient(135deg, #2c7744 0%, #5a9 100%);
+color: white;
+padding: 1rem 0;
+box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.header-content {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.logo {
+font-size: 1.8rem;
+font-weight: bold;
+}
+.logo span {
+color: #ffd700;
+}
+.auth-buttons {
+display: flex;
+gap: 1rem;
+}
+.hero {
+background: linear-gradient(rgba(44, 119, 68, 0.8), rgba(85, 170, 153, 0.8));
+color: white;
+text-align: center;
+padding: 4rem 0;
+}
+.hero h1 {
+font-size: 3rem;
+margin-bottom: 1rem;
+}
+.btn {
+display: inline-block;
+background: #ffd700;
+color: #333;
+padding: 12px 30px;
+border: none;
+border-radius: 5px;
+text-decoration: none;
+font-weight: bold;
+cursor: pointer;
+transition: all 0.3s;
+}
+.btn:hover {
+background: #ffed4a;
+transform: translateY(-2px);
+}
+.btn-secondary {
+background: #6c757d;
+color: white;
+}
+.btn-secondary:hover {
+background: #5a6268;
+}
+.form-section {
+background: white;
+padding: 3rem;
+margin: 2rem auto;
+border-radius: 10px;
+box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+max-width: 600px;
+}
+.form-group {
+margin-bottom: 1.5rem;
+}
+.form-group label {
+display: block;
+margin-bottom: 0.5rem;
+font-weight: bold;
+}
+.form-control {
+width: 100%;
+padding: 12px;
+border: 1px solid #ddd;
+border-radius: 5px;
+font-size: 1rem;
+}
+textarea.form-control {
+min-height: 120px;
+resize: vertical;
+}
+.services {
+padding: 4rem 0;
+text-align: center;
+}
+.section-title {
+font-size: 2.5rem;
+margin-bottom: 3rem;
+color: #333;
+}
+.services-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 2rem;
+margin-top: 2rem;
+}
+.service-card {
+background: white;
+padding: 2rem;
+border-radius: 10px;
+box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+.service-icon {
+font-size: 3rem;
+color: #2c7744;
+margin-bottom: 1rem;
+}
+footer {
+background: #333;
+color: white;
+padding: 3rem 0 1rem;
+margin-top: 4rem;
+}
+.footer-content {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 2rem;
+margin-bottom: 2rem;
+}
+.footer-section h3 {
+margin-bottom: 1rem;
+color: #ffd700;
+}
+.footer-bottom {
+text-align: center;
+padding-top: 2rem;
+border-top: 1px solid #555;
+}
+.success-message {
+background: #d4edda;
+color: #155724;
+padding: 1rem;
+border-radius: 5px;
+margin-bottom: 1rem;
+text-align: center;
+display: none;
+}
+.error-message {
+background: #f8d7da;
+color: #721c24;
+padding: 1rem;
+border-radius: 5px;
+margin-bottom: 1rem;
+text-align: center;
+display: none;
+}
+.dashboard {
+display: none;
+}
+.dashboard-header {
+background: linear-gradient(135deg, #2c7744 0%, #5a9 100%);
+color: white;
+padding: 2rem 0;
+text-align: center;
+}
+.dashboard-nav {
+background: #333;
+padding: 1rem 0;
+}
+.dashboard-nav ul {
+display: flex;
+justify-content: center;
+list-style: none;
+gap: 2rem;
+}
+.dashboard-nav a {
+color: white;
+text-decoration: none;
+padding: 0.5rem 1rem;
+border-radius: 5px;
+transition: background 0.3s;
+cursor: pointer;
+}
+.dashboard-nav a:hover,
+.dashboard-nav a.active {
+background: #2c7744;
+}
+.dashboard-content {
+padding: 2rem 0;
+min-height: 400px;
+}
+.tab-content {
+display: none;
+}
+.tab-content.active {
+display: block;
+}
+.profile-info {
+background: white;
+padding: 2rem;
+border-radius: 10px;
+box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+margin-bottom: 2rem;
+}
+.orders-list {
+display: grid;
+gap: 1rem;
+}
+.order-card {
+background: white;
+padding: 1.5rem;
+border-radius: 10px;
+box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+border-left: 4px solid #2c7744;
+}
+@media (max-width: 768px) {
+.header-content {
+flex-direction: column;
+text-align: center;
+gap: 1rem;
+}
+.hero h1 {
+font-size: 2rem;
+}
+.form-section {
+padding: 2rem 1rem;
+}
+.dashboard-nav ul {
+flex-direction: column;
+gap: 0.5rem;
+}
+}
+</style>
+</head>
+<body>
+<!-- Главная страница -->
+<div id="mainContent">
+<header>
+<div class="container">
+<div class="header-content">
+<div class="logo">Ремонт<span>Просто48</span></div>
+<div class="auth-buttons">
+<button class="btn btn-secondary" id="loginBtn">Вход для
+мастеров</button>
+<button class="btn" id="registerBtn">Регистрация мастера</button>
+</div>
+</div>
+</div>
+</header>
+<section class="hero">
+<div class="container">
+<h1>Ремонт в Липецке стал проще!</h1>
+<p>Оставьте заявку и мы подберем лучшего мастера для вашего
+ремонта</p>
+</div>
+</section>
+<section class="form-section container">
+<h2 style="text-align: center; margin-bottom: 2rem;">Оставить заявку на
+ремонт</h2>
+<div class="success-message" id="successMessage">
+✅ Заявка сформирована! Откроется почта для отправки.
+</div>
+<form onsubmit="sendEmail(event)">
+<div class="form-group">
+<label for="service">Тип услуги *</label>
+<select class="form-control" id="service" name="service" required>
+<option value="">Выберите услугу</option>
+<option value="Сантехника">Сантехника</option>
+<option value="Электрика">Электрика</option>
+<option value="Ремонт квартир">Ремонт квартир</option>
+<option value="Сборка мебели">Сборка мебели</option>
+<option value="Уборка">Уборка</option>
+<option value="Другое">Другое</option>
+</select>
+</div>
+<div class="form-group">
+<label for="name">Ваше имя *</label>
+<input type="text" class="form-control" id="name" name="name" required>
+</div>
+<div class="form-group">
+<label for="phone">Телефон *</label>
+<input type="tel" class="form-control" id="phone" name="phone" required>
+</div>
+<div class="form-group">
+<label for="address">Адрес</label>
+<input type="text" class="form-control" id="address" name="address">
+</div>
+<div class="form-group">
+<label for="description">Описание проблемы</label>
+<textarea class="form-control" id="description" name="description"></textarea>
+</div>
+<button type="submit" class="btn" style="width: 100%;">
+📧 Отправить заявку на почту
+</button>
+</form>
+<div style="margin-top: 2rem; padding: 1rem; background: #f8f9fa; border-radius:
+5px;">
+<h4>💡 Как это работает:</h4>
+<p>Заполните форму и нажмите кнопку - откроется почта с готовой заявкой.
+Просто нажмите "Отправить"!</p>
+</div>
+</section>
+<section class="services">
+<div class="container">
+<h2 class="section-title">Наши услуги</h2>
+<div class="services-grid">
+<div class="service-card">
+<div class="service-icon">🔧</div>
+<h3>Сантехника</h3>
+<p>Установка и ремонт сантехники, прочистка засоров</p>
+</div>
+<div class="service-card">
+<div class="service-icon">⚡</div>
+<h3>Электрика</h3>
+<p>Монтаж электропроводки, установка розеток</p>
+</div>
+<div class="service-card">
+<div class="service-icon">🏠</div>
+<h3>Ремонт квартир</h3>
+<p>Капитальный и косметический ремонт под ключ</p>
+</div>
+<div class="service-card">
+<div class="service-icon">🛋</div>
+<h3>Сборка мебели</h3>
+<p>Профессиональная сборка любой мебели</p>
+</div>
+</div>
+</div>
+</section>
+<footer>
+<div class="container">
+<div class="footer-content">
+<div class="footer-section">
+<h3>Контакты</h3>
+<p>Email: tasherg192@gmail.com</p>
+<p>Адрес: г. Липецк</p>
+</div>
+<div class="footer-section">
+<h3>Время работы</h3>
+<p>Пн-Пт: 9:00 - 18:00</p>
+<p>Сб-Вс: 10:00 - 16:00</p>
+</div>
+</div>
+<div class="footer-bottom">
+<p>&copy; 2024 РемонтПросто48. Все права защищены.</p>
+</div>
+</div>
+</footer>
+</div>
+<!-- Форма регистрации мастера -->
+<div id="registerForm" class="form-section container" style="display: none;">
+<h2 style="text-align: center; margin-bottom: 2rem;">Регистрация мастера</h2>
+<div class="error-message" id="registerError"></div>
+<div class="success-message" id="registerSuccess"></div>
+<form id="masterRegisterForm">
+<div class="form-group">
+<label for="masterName">ФИО *</label>
+<input type="text" class="form-control" id="masterName" required>
+</div>
+<div class="form-group">
+<label for="masterEmail">Email *</label>
+<input type="email" class="form-control" id="masterEmail" required>
+</div>
+<div class="form-group">
+<label for="masterPhone">Телефон *</label>
+<input type="tel" class="form-control" id="masterPhone" required>
+</div>
+<div class="form-group">
+<label for="masterSpecialty">Специализация *</label>
+<select class="form-control" id="masterSpecialty" required>
+<option value="">Выберите специализацию</option>
+<option value="Сантехника">Сантехника</option>
+<option value="Электрика">Электрика</option>
+<option value="Ремонт квартир">Ремонт квартир</option>
+<option value="Сборка мебели">Сборка мебели</option>
+<option value="Уборка">Уборка</option>
+<option value="Разнорабочий">Разнорабочий</option>
+</select>
+</div>
+<div class="form-group">
+<label for="masterExperience">Опыт работы (лет) *</label>
+<input type="number" class="form-control" id="masterExperience" min="0"
+required>
+</div>
+<div class="form-group">
+<label for="masterPassword">Пароль *</label>
+<input type="password" class="form-control" id="masterPassword" required>
+</div>
+<div class="form-group">
+<label for="masterConfirmPassword">Подтвердите пароль *</label>
+<input type="password" class="form-control" id="masterConfirmPassword"
+required>
+</div>
+<button type="button" class="btn" id="registerMasterBtn" style="width: 100%;
+margin-bottom: 1rem;">Зарегистрироваться</button>
+<button type="button" class="btn btn-secondary" id="backFromRegisterBtn"
+style="width: 100%;">Назад на главную</button>
+</form>
+</div>
+<!-- Форма входа мастера -->
+<div id="loginForm" class="form-section container" style="display: none;">
+<h2 style="text-align: center; margin-bottom: 2rem;">Вход для мастеров</h2>
+<div class="error-message" id="loginError"></div>
+<form id="masterLoginForm">
+<div class="form-group">
+<label for="loginEmail">Email *</label>
+<input type="email" class="form-control" id="loginEmail" required>
+</div>
+<div class="form-group">
+<label for="loginPassword">Пароль *</label>
+<input type="password" class="form-control" id="loginPassword" required>
+</div>
+<button type="button" class="btn" id="loginMasterBtn" style="width: 100%;
+margin-bottom: 1rem;">Войти</button>
+<button type="button" class="btn btn-secondary" id="backFromLoginBtn"
+style="width: 100%;">Назад на главную</button>
+</form>
+</div>
+<!-- Личный кабинет мастера -->
+<div id="masterDashboard" class="dashboard">
+<div class="dashboard-header">
+<div class="container">
+<h1>Личный кабинет мастера</h1>
+<p id="welcomeMessage">Добро пожаловать!</p>
+</div>
+</div>
+<nav class="dashboard-nav">
+<div class="container">
+<ul>
+<li><a href="#" id="profileTabBtn" class="active">Профиль</a></li>
+<li><a href="#" id="ordersTabBtn">Заказы</a></li>
+<li><a href="#" id="statsTabBtn">Статистика</a></li>
+<li><a href="#" id="logoutBtn">Выйти</a></li>
+</ul>
+</div>
+</nav>
+<div class="dashboard-content container">
+<div id="profileTab" class="tab-content active">
+<h2>Мой профиль</h2>
+<div class="profile-info">
+<p><strong>ФИО:</strong> <span id="profileName"></span></p>
+<p><strong>Email:</strong> <span id="profileEmail"></span></p>
+<p><strong>Телефон:</strong> <span id="profilePhone"></span></p>
+<p><strong>Специализация:</strong> <span
+id="profileSpecialty"></span></p>
+<p><strong>Опыт работы:</strong> <span id="profileExperience"></span>
+лет</p>
+</div>
+<button class="btn" id="editProfileBtn">Редактировать профиль</button>
+</div>
+<div id="ordersTab" class="tab-content">
+<h2>Мои заказы</h2>
+<div class="orders-list" id="ordersList">
+</div>
+</div>
+<div id="statisticsTab" class="tab-content">
+<h2>Статистика</h2>
+<div class="profile-info">
+<p><strong>Всего выполнено заказов:</strong> <span
+id="totalOrders">0</span></p>
+<p><strong>Текущие заказы:</strong> <span
+id="currentOrders">0</span></p>
+<p><strong>Рейтинг:</strong> ⭐⭐⭐⭐⭐</p>
+<p><strong>Дата регистрации:</strong> <span
+id="registrationDate"></span></p>
+</div>
+</div>
+</div>
+</div>
+<script>
+// Функция отправки email
+function sendEmail(event) {
+event.preventDefault();
+const service = document.getElementById('service').value;
+const name = document.getElementById('name').value;
+const phone = document.getElementById('phone').value;
+const address = document.getElementById('address').value;
+const description = document.getElementById('description').value;
+const subject = `Заявка на ремонт: ${service}`;
+const body = `Новая заявка на ремонт:%0D%0A%0D%0AИмя:
+${name}%0D%0AТелефон: ${phone}%0D%0AАдрес: ${address || 'Не
+указан'}%0D%0AУслуга: ${service}%0D%0AОписание: ${description || 'Не
+указано'}%0D%0A%0D%0AДата: ${new Date().toLocaleString('ru-RU')}`;
+window.open(`mailto:tasherg192@gmail.com?subject=${encodeURIComponent(subject)}&b
+ody=${encodeURIComponent(body)}`, '_blank');
+document.getElementById('successMessage').style.display = 'block';
+event.target.reset();
+setTimeout(() => {
+document.getElementById('successMessage').style.display = 'none';
+}, 5000);
+}
+// Все обработчики для мастеров
+document.addEventListener('DOMContentLoaded', function() {
+// Основные кнопки навигации
+document.getElementById('loginBtn').addEventListener('click', showLoginForm);
+document.getElementById('registerBtn').addEventListener('click',
+showRegisterForm);
+// Кнопки возврата
+document.getElementById('backFromRegisterBtn').addEventListener('click',
+showMainPage);
+document.getElementById('backFromLoginBtn').addEventListener('click',
+showMainPage);
+// Формы мастеров
+document.getElementById('registerMasterBtn').addEventListener('click',
+registerMaster);
+document.getElementById('loginMasterBtn').addEventListener('click', loginMaster);
+// Дашборд
+document.getElementById('profileTabBtn').addEventListener('click', function() {
+showTab('profile'); });
+document.getElementById('ordersTabBtn').addEventListener('click', function() {
+showTab('orders'); });
+document.getElementById('statsTabBtn').addEventListener('click', function() {
+showTab('statistics'); });
+document.getElementById('logoutBtn').addEventListener('click', logout);
+document.getElementById('editProfileBtn').addEventListener('click', editProfile);
+// Проверка авторизации при загрузке
+const currentMaster = localStorage.getItem('currentMaster');
+if (currentMaster) {
+showDashboard();
+}
+});
+function showMainPage() {
+document.getElementById('mainContent').style.display = 'block';
+document.getElementById('registerForm').style.display = 'none';
+document.getElementById('loginForm').style.display = 'none';
+document.getElementById('masterDashboard').style.display = 'none';
+}
+function showRegisterForm() {
+document.getElementById('mainContent').style.display = 'none';
+document.getElementById('registerForm').style.display = 'block';
+document.getElementById('loginForm').style.display = 'none';
+document.getElementById('masterDashboard').style.display = 'none';
+}
+function showLoginForm() {
+document.getElementById('mainContent').style.display = 'none';
+document.getElementById('registerForm').style.display = 'none';
+document.getElementById('loginForm').style.display = 'block';
+document.getElementById('masterDashboard').style.display = 'none';
+}
+function showDashboard() {
+document.getElementById('mainContent').style.display = 'none';
+document.getElementById('registerForm').style.display = 'none';
+document.getElementById('loginForm').style.display = 'none';
+document.getElementById('masterDashboard').style.display = 'block';
+loadMasterData();
+}
+function registerMaster() {
+const name = document.getElementById('masterName').value;
+const email = document.getElementById('masterEmail').value;
+const phone = document.getElementById('masterPhone').value;
+const specialty = document.getElementById('masterSpecialty').value;
+const experience = document.getElementById('masterExperience').value;
+const password = document.getElementById('masterPassword').value;
+const confirmPassword =
+document.getElementById('masterConfirmPassword').value;
+const errorDiv = document.getElementById('registerError');
+const successDiv = document.getElementById('registerSuccess');
+if (password !== confirmPassword) {
+errorDiv.textContent = 'Пароли не совпадают!';
+errorDiv.style.display = 'block';
+successDiv.style.display = 'none';
+return;
+}
+if (password.length < 6) {
+errorDiv.textContent = 'Пароль должен содержать минимум 6 символов!';
+errorDiv.style.display = 'block';
+successDiv.style.display = 'none';
+return;
+}
+const newMaster = {
+id: Date.now(),
+name,
+email,
+phone,
+specialty,
+experience,
+password,
+registrationDate: new Date().toLocaleDateString('ru-RU'),
+orders: []
+};
+const existingMasters = JSON.parse(localStorage.getItem('masters') || '[]');
+existingMasters.push(newMaster);
+localStorage.setItem('masters', JSON.stringify(existingMasters));
+localStorage.setItem('currentMaster', JSON.stringify(newMaster));
+errorDiv.style.display = 'none';
+successDiv.textContent = 'Регистрация успешна!';
+successDiv.style.display = 'block';
+setTimeout(() => {
+showDashboard();
+}, 2000);
+}
+function loginMaster() {
+const email = document.getElementById('loginEmail').value;
+const password = document.getElementById('loginPassword').value;
+const errorDiv = document.getElementById('loginError');
+const masters = JSON.parse(localStorage.getItem('masters') || '[]');
+const master = masters.find(m => m.email === email && m.password ===
+password);
+if (master) {
+localStorage.setItem('currentMaster', JSON.stringify(master));
+showDashboard();
+} else {
+errorDiv.textContent = 'Неверный email или пароль!';
+errorDiv.style.display = 'block';
+}
+}
+function logout() {
+localStorage.removeItem('currentMaster');
+showMainPage();
+}
+function loadMasterData() {
+const master = JSON.parse(localStorage.getItem('currentMaster'));
+if (!master) {
+showLoginForm();
+return;
+}
+document.getElementById('welcomeMessage').textContent = `Добро пожаловать,
+${master.name}!`;
+document.getElementById('profileName').textContent = master.name;
+document.getElementById('profileEmail').textContent = master.email;
+document.getElementById('profilePhone').textContent = master.phone;
+document.getElementById('profileSpecialty').textContent = master.specialty;
+document.getElementById('profileExperience').textContent = master.experience;
+document.getElementById('registrationDate').textContent = master.registrationDate;
+loadOrders();
+}
+function loadOrders() {
+const ordersList = document.getElementById('ordersList');
+const master = JSON.parse(localStorage.getItem('currentMaster'));
+const masterOrders = master.orders || [];
+if (masterOrders.length === 0) {
+ordersList.innerHTML = `
+<div class="order-card" style="text-align: center; padding: 3rem;">
+<h3>Заявок пока нет</h3>
+<p>Когда клиенты будут оставлять заявки, они появятся здесь</p>
+<div style="font-size: 3rem; margin-top: 1rem;">📋</div>
+</div>
+`;
+}
+document.getElementById('totalOrders').textContent = masterOrders.length;
+document.getElementById('currentOrders').textContent = masterOrders.filter(o =>
+o.status !== 'completed').length;
+}
+function showTab(tabName) {
+document.querySelectorAll('.tab-content').forEach(tab => {
+tab.classList.remove('active');
+});
+document.querySelectorAll('.dashboard-nav a').forEach(link => {
+link.classList.remove('active');
+});
+document.getElementById(tabName + 'Tab').classList.add('active');
+event.target.classList.add('active');
+}
+function editProfile() {
+const master = JSON.parse(localStorage.getItem('currentMaster'));
+const newName = prompt('Введите новое ФИО:', master.name);
+const newPhone = prompt('Введите новый телефон:', master.phone);
+if (newName && newPhone) {
+const masters = JSON.parse(localStorage.getItem('masters'));
+const updatedMasters = masters.map(m => {
+if (m.id === master.id) {
+return { ...m, name: newName, phone: newPhone };
+}
+return m;
+});
+localStorage.setItem('masters', JSON.stringify(updatedMasters));
+localStorage.setItem('currentMaster', JSON.stringify({
+...master,
+name: newName,
+phone: newPhone
+}));
+loadMasterData();
+alert('Профиль успешно обновлен!');
+}
+}
+</script>
+</body>
+</html>
